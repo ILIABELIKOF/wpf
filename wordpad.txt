@@ -1,0 +1,265 @@
+admin.xaml(Старый):
+<!--<Grid Margin="10,10,10,10">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="67*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+
+    </Grid.RowDefinitions>
+
+    <TextBlock Text=""
+               Grid.Row="0"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="0,0,0,347" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+
+
+    <DataGrid x:Name="Users"
+              
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              IsReadOnly="False"
+              Margin="6,10,271,270"
+              SelectionMode="Single" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1">
+
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Фам" Binding="{Binding LastName}" Width="Auto"/>
+            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="Auto"/>
+            <DataGridTextColumn Header="Роль" Binding="{Binding Role}" Width="Auto"/>
+            <DataGridTextColumn Header="Логин" Binding="{Binding Username}" Width="Auto"/>
+            <DataGridTextColumn Header="Заблок" Binding="{Binding IsLocked}" Width="Auto"/>
+        </DataGrid.Columns>
+    </DataGrid>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,300,0,0" Grid.Row="1" Height="92" Width="508" Grid.Column="2">
+        <Button Content="Добавить пользователя"
+        Width="160"
+        Height="30"
+        FontWeight="Bold"
+        Cursor="Hand"
+        Click="Adduser_Click"/>
+        <Button Content="Разблокировать"
+        Width="160"
+        Height="30"
+        FontWeight="Bold"
+        Cursor="Hand"
+        Margin="5"
+        Click="UnlockUser_Click"/>
+        <Button Content="Сохранить изменения"
+        Width="160"
+        Height="30"
+        FontWeight="Bold"
+        Margin="5"
+        Cursor="Hand"
+        Click="SaveData_Click"/>
+    </StackPanel>
+
+</Grid>-->
+
+
+ChangePasw.xaml.cs(старый):
+
+public partial class ChangePasw : Window
+{
+    private readonly int _userId;
+    private string currentUsername; // текущий пользователь
+    public ChangePasw(int userid)
+    {
+        InitializeComponent();
+    _userId = userid;
+    }
+
+    public ChangePasw(string username)
+    {
+        InitializeComponent();
+        currentUsername = username;
+        MessageBox.Show( "Пожалуйста введите старый пароль и новый пароль для подтверждения.");
+    }
+
+    private void ChangeButton_Click(object sender, RoutedEventArgs e)
+    {
+        string oldPassword = txtOldPassword.Password;
+        string newPassword = txtNewPassword.Password;
+        string confirmPassword = txtAcceptNewPassword.Password;
+
+        // Проверка на пустые поля
+        if (string.IsNullOrWhiteSpace(oldPassword) ||
+            string.IsNullOrWhiteSpace(newPassword) ||
+            string.IsNullOrWhiteSpace(confirmPassword))
+        {
+             MessageBox.Show ("Все поля должны быть заполнены!");
+            return;
+        }
+
+       
+        //Проверка совпадения нового пароля и подтверждения
+
+        if (newPassword != confirmPassword)
+        {
+            MessageBox.Show("Новый пароль и подтверждение не совпадают!");
+            return;
+        }
+        //НАФИГ ХЭШЕРОВАНИЕ
+        try
+        {
+            using (var db = new Model1DataSet())
+            {
+                // Находим пользователя в базе данных
+                var user = db.Users.FirstOrDefault(u => u.UserName == currentUsername);
+
+                if (user != null)
+                {
+                    
+                    // Проверяем старый пароль
+                    if (user.Passwor == oldPassword)
+                    {
+                        // Сохраняем новый пароль
+                        //user.Passwor = HashPassword(newPassword);
+                        db.AcceptChanges();
+
+                        MessageBox.Show("Пароль успешно изменен!");
+
+                        // Очищаем поля
+                        txtOldPassword.Password = "";
+                        txtNewPassword.Password = "";
+                        txtAcceptNewPassword.Password = "";
+
+                        System.Threading.Thread.Sleep(2000);
+                        this.Close();
+
+                    }
+                    // Автоматическое закрытие окна через 2 секунды
+                    
+                    else
+                    {
+                        MessageBox.Show( "Неверный старый пароль!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь не найден!");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при изменении пароля: {ex.Message}");
+        }
+
+        // 1. Автоматическое сохранение нового пароля
+        SaveNewPassword(newPassword);
+
+        // 2. Очистка полей заполнения
+        ClearPasswordFields();
+
+
+
+    }
+  
+
+    private void NewPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        string password = txtNewPassword.Password;
+
+        if (string.IsNullOrEmpty(password))
+        {
+            MessageBox.Show( "Введите новый пароль");
+            return;
+        }
+
+        // Проверка длины
+        if (password.Length < 6)
+        {
+            MessageBox.Show ("Пароль слишком короткий (минимум 6 символов)");
+            return;
+        }
+
+        // Проверка сложности
+        bool hasDigit = Regex.IsMatch(password, @"\d");
+        bool hasUpper = Regex.IsMatch(password, @"[A-Z]");
+        bool hasLower = Regex.IsMatch(password, @"[a-z]");
+
+        if (!hasDigit || !hasUpper || !hasLower)
+        {
+            MessageBox.Show("Пароль должен содержать цифры, заглавные и строчные буквы");
+            return;
+        }
+
+        MessageBox.Show("Пароль соответствует требованиям безопасности");
+
+
+    
+
+
+    }
+
+
+    private void SaveNewPassword(string newPassword)
+    {
+        try
+        {
+            using (var db = new Model1Entities1())
+            {
+                // Находим пользователя в базе данных
+                var user = db.Users.FirstOrDefault(u => u.UserName == currentUsername);
+
+                if (user != null)
+                {
+                    // Хэшируем и сохраняем новый пароль
+                    user.Passwor = (newPassword);
+                    db.SaveChanges();
+
+                    // Логирование успешного изменения
+                    Console.WriteLine($"Пароль для пользователя {currentUsername} был автоматически обновлен");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка: пользователь не найден в базе данных");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при автоматическом сохранении пароля: {ex.Message}");
+        }
+    }
+    private void ClearPasswordFields()
+    {
+        try
+        {
+            // Очищаем все поля паролей
+            txtOldPassword.Password = "";
+            txtNewPassword.Password = "";
+            txtAcceptNewPassword.Password = "";
+
+
+            // Сбрасываем фокус на первое поле
+            txtOldPassword.Focus();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при очистке полей: {ex.Message}");
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

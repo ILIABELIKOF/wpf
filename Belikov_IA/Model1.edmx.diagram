@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2e581128d56842a38bc2fbdece9c8568" Name="Diagram1" ZoomLevel="96">
+        <EntityTypeShape EntityType="Model1.C_Services" Width="1.5" PointX="0.875" PointY="8.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Cleaning_Rooms" Width="1.5" PointX="10.5" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Guests" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Order" Width="1.5" PointX="3.125" PointY="8.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.PayDay" Width="1.5" PointX="0.625" PointY="4.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Reservations" Width="1.5" PointX="3.25" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Room_Acces" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Rooms" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.sysdiagrams" Width="1.5" PointX="6.25" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Users" Width="1.5" PointX="8.25" PointY="1" IsExpanded="false" />
+        <AssociationConnector Association="Model1.FK_Order_C_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_Cleaning_Rooms_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_PayDay_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_Reservations_Guests" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.FK_Room_Acces_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_PayDay_Reservations" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_Reservations_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_Room_Acces_Rooms" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

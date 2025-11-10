@@ -1,0 +1,206 @@
+USE [Model1]
+GO
+/****** Object:  Table [dbo].[C_Services]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[C_Services](
+	[id] [int] NOT NULL,
+	[serviceName] [nchar](10) NULL,
+	[price] [decimal](18, 0) NULL,
+	[description] [varchar](50) NULL,
+ CONSTRAINT [PK_C_Services] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cleaning_Rooms]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cleaning_Rooms](
+	[id] [int] NOT NULL,
+	[room_id] [int] NULL,
+	[cleaningTime] [datetime] NULL,
+	[employee_id] [int] NULL,
+	[cleaningStatus] [nchar](10) NULL,
+ CONSTRAINT [PK_Cleaning_Rooms] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Guests]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Guests](
+	[id] [int] NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[SecondName] [varchar](50) NULL,
+	[email] [varchar](50) NULL,
+	[phone] [nchar](10) NULL,
+	[documentNumber] [nchar](10) NULL,
+	[checkIn] [datetime] NULL,
+	[checkOut] [datetime] NULL,
+ CONSTRAINT [PK_Guests] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[id] [int] NOT NULL,
+	[reservation_id] [int] NULL,
+	[service_id] [int] NULL,
+	[quality] [int] NULL,
+	[status] [nchar](10) NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PayDay]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PayDay](
+	[id] [int] NOT NULL,
+	[guest_id] [int] NULL,
+	[reservation_id] [int] NULL,
+	[paymentMethod] [nchar](10) NULL,
+	[IsPayed] [bit] NULL,
+	[price] [varchar](50) NULL,
+	[PaymentDate] [datetime] NULL,
+ CONSTRAINT [PK_PayDay] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservations]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservations](
+	[id] [int] NOT NULL,
+	[guest_id] [int] NULL,
+	[room_id] [int] NULL,
+	[checkIn] [datetime] NULL,
+	[checkOut] [datetime] NULL,
+	[status] [nchar](10) NULL,
+ CONSTRAINT [PK_Reservations] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Room_Acces]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Room_Acces](
+	[id] [int] NOT NULL,
+	[guest_id] [int] NULL,
+	[room_id] [int] NULL,
+	[cardCode] [nchar](10) NULL,
+	[status] [nchar](10) NULL,
+ CONSTRAINT [PK_Room_Acces] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Rooms]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rooms](
+	[id] [int] NOT NULL,
+	[floor] [nchar](10) NULL,
+	[room_number] [nchar](10) NULL,
+	[CategoryRoom] [nchar](10) NULL,
+	[StatusRoom] [nchar](10) NULL,
+ CONSTRAINT [PK_Rooms] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 26.09.2025 21:28:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[SecondName] [nvarchar](50) NOT NULL,
+	[UserName] [nvarchar](50) NOT NULL,
+	[Passwor] [nvarchar](50) NOT NULL,
+	[role] [nvarchar](50) NOT NULL,
+	[TryPlugin] [bit] NULL,
+	[IsBlocked] [bit] NULL,
+	[IsFirst] [bit] NULL,
+	[lastLogin] [datetime] NULL,
+	[FailedLoginAttempts] [int] NULL,
+ CONSTRAINT [PK_Users1] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Cleaning_Rooms]  WITH CHECK ADD  CONSTRAINT [FK_Cleaning_Rooms_Users1] FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Users] ([id])
+GO
+ALTER TABLE [dbo].[Cleaning_Rooms] CHECK CONSTRAINT [FK_Cleaning_Rooms_Users1]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_C_Services] FOREIGN KEY([service_id])
+REFERENCES [dbo].[C_Services] ([id])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_C_Services]
+GO
+ALTER TABLE [dbo].[PayDay]  WITH CHECK ADD  CONSTRAINT [FK_PayDay_Guests] FOREIGN KEY([guest_id])
+REFERENCES [dbo].[Guests] ([id])
+GO
+ALTER TABLE [dbo].[PayDay] CHECK CONSTRAINT [FK_PayDay_Guests]
+GO
+ALTER TABLE [dbo].[PayDay]  WITH CHECK ADD  CONSTRAINT [FK_PayDay_Reservations] FOREIGN KEY([reservation_id])
+REFERENCES [dbo].[Reservations] ([id])
+GO
+ALTER TABLE [dbo].[PayDay] CHECK CONSTRAINT [FK_PayDay_Reservations]
+GO
+ALTER TABLE [dbo].[Reservations]  WITH CHECK ADD  CONSTRAINT [FK_Reservations_Guests] FOREIGN KEY([guest_id])
+REFERENCES [dbo].[Guests] ([id])
+GO
+ALTER TABLE [dbo].[Reservations] CHECK CONSTRAINT [FK_Reservations_Guests]
+GO
+ALTER TABLE [dbo].[Reservations]  WITH CHECK ADD  CONSTRAINT [FK_Reservations_Rooms] FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([id])
+GO
+ALTER TABLE [dbo].[Reservations] CHECK CONSTRAINT [FK_Reservations_Rooms]
+GO
+ALTER TABLE [dbo].[Room_Acces]  WITH CHECK ADD  CONSTRAINT [FK_Room_Acces_Guests] FOREIGN KEY([guest_id])
+REFERENCES [dbo].[Guests] ([id])
+GO
+ALTER TABLE [dbo].[Room_Acces] CHECK CONSTRAINT [FK_Room_Acces_Guests]
+GO
+ALTER TABLE [dbo].[Room_Acces]  WITH CHECK ADD  CONSTRAINT [FK_Room_Acces_Rooms] FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([id])
+GO
+ALTER TABLE [dbo].[Room_Acces] CHECK CONSTRAINT [FK_Room_Acces_Rooms]
+GO
