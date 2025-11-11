@@ -6,26 +6,137 @@
         xmlns:local="clr-namespace:Belikov_IA"
         mc:Ignorable="d"
         Title="График Уборки" Height="450" Width="800">
-    <Grid Margin="20">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1A1A2E" Offset="0"/>
+            <GradientStop Color="#533483" Offset="1"/>
+            <GradientStop Color="#E94560" Offset="0.4"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <!-- Стили в едином стиле проекта -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#1A1A2E"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#E94560"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#2A2A2A"/>
+            <Setter Property="AlternatingRowBackground" Value="#333333"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#E94560"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3A3A4E"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#E94560"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#E94560" Offset="0"/>
+                        <GradientStop Color="#CC0000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+                
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#660000"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20,20,20,54">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Мой график уборок" Grid.Row="0"/>
+
+        <!-- Заголовок в стиле проекта -->
+        <TextBlock Text="ГРАФИК УБОРКИ ПОМЕЩЕНИЙ"
+                   Grid.Row="0"
+                   FontSize="18"
+                   FontWeight="Black"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,10"
+                   Foreground="#CC0000" 
+                   Background="#1A1A2E"
+                   FontFamily="Impact" Width="228"/>
+
+        <!-- DataGrid с оформлением -->
         <DataGrid x:Name="Users"
-           AutoGenerateColumns="False"
-           CanUserAddRows="False"
-           IsReadOnly="False"
-           Margin="10, 10, 10, 10"
-           SelectionMode="Single"
-              Grid.Row="1">
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  Margin="10"
+                  SelectionMode="Single"
+                  Grid.Row="1"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата уборки" Binding="{Binding cleaningdate}" Width="Auto"/>
-                <DataGridTextColumn Header="Номер" Binding="{Binding number}" Width="Auto"/>
-                <DataGridTextColumn Header="Статус" Binding="{Binding status}" Width="Auto"/>
-                <DataGridTextColumn Header="Действия" Binding="{Binding actions}" Width="Auto"/>
+                <DataGridTextColumn Header="Дата уборки" 
+                                   Binding="{Binding cleaningdate}" 
+                                   Width="*"
+                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
+                <DataGridTextColumn Header="Номер комнаты" 
+                                   Binding="{Binding number}" 
+                                   Width="*"
+                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
+                <DataGridTextColumn Header="Статус" 
+                                   Binding="{Binding status}" 
+                                   Width="*"
+                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
+                <DataGridTextColumn Header="Действия" 
+                                   Binding="{Binding actions}" 
+                                   Width="*"
+                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <!-- Информационная панель -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="Всего записей: " Foreground="White" FontFamily="Consolas"/>
+            <TextBlock x:Name="RecordsCount" Text="0" Foreground="#E94560" FontFamily="Consolas" FontWeight="Bold"/>
+        </StackPanel>
+        <StackPanel Margin="652,40,-10,-46" Grid.Row="2">
+            <Button x:Name="btnCancel" Content="ВЫХОД" Width="91" Click="BtnCancel_Click1" Height="31"/>
+        </StackPanel>
     </Grid>
 </Window>

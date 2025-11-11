@@ -4,25 +4,27 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Belikov_IA"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Бронирования">
+      mc:Ignorable="d"
+      Title="Бронирования" Height="410" Width="803">
     <Page.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#4169E1" Offset="0.0"/>
-            <!-- Royal Blue -->
-            <GradientStop Color="#48D1CC" Offset="0.5"/>
-            <!-- Medium Turquoise -->
-            <GradientStop Color="#8A2BE2" Offset="1.0"/>
+            <GradientStop Color="#0C0C17" Offset="0"/>
+            <GradientStop Color="#1A1A2E" Offset="0.5"/>
+            <GradientStop Color="#16213E" Offset="1"/>
             <!-- Blue Violet -->
         </LinearGradientBrush>
     </Page.Background>
-    <Grid Margin="0,40,10,10">
+    <Grid Height="410" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="350"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <DataGrid Name="GuestsDataGrid" AutoGenerateColumns="False" Grid.Row="0" Background="Transparent" Margin="0,0,0,10">
+        <DataGrid Name="GuestsDataGrid" AutoGenerateColumns="False" Background="Transparent" Height="420" VerticalAlignment="Top" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="100" />
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding last_name}" Width="100"/>

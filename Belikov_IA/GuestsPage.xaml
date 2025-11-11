@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Гости">
 
-    <Grid Margin="10">
+    <Grid Margin="10,0,0,10">
         <DataGrid Name="GuestsDataGrid" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="150"/>

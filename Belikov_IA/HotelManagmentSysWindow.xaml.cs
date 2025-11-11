@@ -22,6 +22,10 @@ namespace Belikov_IA
         public HotelManagmentSysWindow()
         {
             InitializeComponent();
+
+            GuestsFrame.Navigate(new GuestsPage());
+            BookingsFrame.Navigate(new BookingPage());
+            PhonesFrame.Navigate(new RoomPage());
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -29,10 +33,7 @@ namespace Belikov_IA
             this.Close();
         }
 
-        private void CleaningManagementFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            this.Close();
-        }
+    
 
         private void ToAdmin(object sender, RoutedEventArgs e)
         {
@@ -40,6 +41,14 @@ namespace Belikov_IA
             Admin.Owner = this; 
             Admin.Show();
             this.Hide();
+        }
+        private void toCleaningManage_click(object sender, RoutedEventArgs e) { 
+        
+            CleaningSheduleWindow Cleaning = new CleaningSheduleWindow();
+            Cleaning.Owner = this;  
+            Cleaning.Show(); 
+            this.Hide();
+        
         }
     }
 }

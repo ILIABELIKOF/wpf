@@ -23,5 +23,10 @@ namespace Belikov_IA
         {
             InitializeComponent();
         }
+
+        private void BtnCancel_Click1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

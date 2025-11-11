@@ -24,5 +24,10 @@ namespace Belikov_IA
         {
             InitializeComponent();
         }
+
+        private void RoomsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

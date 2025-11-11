@@ -22,14 +22,7 @@ namespace Belikov_IA
         {
             this.Close();
         }
-        //Метод активации по нажатию на Enter, это аналог isDefault=true в xaml
-        private void ManagerPasswordBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                CheckPassword();
-            }
-        }
+       
         //Элементарная валидация с переправой в окно менеджера
         private void CheckPassword()
         {

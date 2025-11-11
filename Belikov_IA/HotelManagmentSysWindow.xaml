@@ -28,19 +28,9 @@
 
 
         </Style>
-               
-               
-        <Style TargetType="TabControl">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#E94560" Offset="0"/>
-                        <GradientStop Color="#CC0000" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-           
-        </Style>
+
+
+      
 
         <Style TargetType="Button">
             <Setter Property="Background">
@@ -64,30 +54,29 @@
 
     </Window.Resources>
     <Grid Margin="10,10,10,7">
-        <TabControl Margin="0,10,12,63">
+        <TabControl Margin="0,10,12,96">
+            
             <TabItem Header="Гости">
-                <Frame Name="GuestsFrame" NavigationUIVisibility="Hidden" Margin="0,0,0,87"/>
+                <Frame Name="GuestsFrame" NavigationUIVisibility="Hidden"/>
             </TabItem>
+                     
 
             <TabItem Header="Бронирования">
-                <Frame Name="BookingsFrame" NavigationUIVisibility="Hidden"/>
+                <Frame Name="BookingsFrame" NavigationUIVisibility="Hidden" Height="287"/>
             </TabItem>
 
             <TabItem Header="Номерной фонд">
-                <Frame Name="PhonesFrame" NavigationUIVisibility="Hidden" Margin="0,0,0,-138"/>
-            </TabItem>
-
-            <TabItem Header="Управление клинингом">
-                <Frame Name="CleaningManagementFrame" NavigationUIVisibility="Hidden" Margin="0,0,0,-244" Navigated="CleaningManagementFrame_Navigated"/>
+                <Frame Name="PhonesFrame" NavigationUIVisibility="Hidden"/>
             </TabItem>
 
         </TabControl>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,361,0,0" Width="103">
-            <Button x:Name="btnCancel" Content="ВЫХОД" Width="100" Click="BtnCancel_Click" Height="31"/>
-        </StackPanel>
-        <StackPanel Margin="120,365,420,-2">
-            <Button x:Name="toAdmin" Content="Панель Администратора" Width="220" Click="ToAdmin" Height="36"/>
 
+        <StackPanel  Margin="674,379,0,0">
+            <Button x:Name="btnCancel" Content="ВЫХОД" Width="96" Click="BtnCancel_Click" Height="31"/>
+        </StackPanel>
+        <StackPanel Margin="10,339,530,4">
+            <Button x:Name="toAdmin" Content="Панель Администратора" Width="220" Click="ToAdmin" Height="30"/>
+            <Button x:Name="toCleaningManage" Content="Управление клинингом" Click="toCleaningManage_click" Width="224"/>
         </StackPanel>
     </Grid>
 </Window>

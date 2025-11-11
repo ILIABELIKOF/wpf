@@ -61,7 +61,16 @@
             <Setter Property="Foreground" Value="#E94560"/>
             <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="FontFamily" Value="Consolas"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Role}" Value="администратор">
+                    <Setter Property="Background" Value="#8B0000"/>
+                    <!-- Темно-бардовый -->
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
+       
+
     </Window.Resources>
 
     <Grid>
