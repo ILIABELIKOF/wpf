@@ -115,7 +115,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Роль:"/>
                 <ComboBox x:Name="cmbRole" Grid.Row="5" Grid.Column="1">
                     <ComboBoxItem Content="администратор"/>
-                    <ComboBoxItem Content="гость"/>
+                    <ComboBoxItem Content="менеджер"/>
                     <ComboBoxItem Content="сотрудник"/>
                 </ComboBox>
 

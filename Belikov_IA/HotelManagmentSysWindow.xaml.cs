@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Belikov_IA
 {
+    
     /// <summary>
     /// Логика взаимодействия для HotelManagmentSysWindow.xaml
     /// </summary>
     public partial class HotelManagmentSysWindow : Window
     {
-        public HotelManagmentSysWindow()
+        private int _currentUserId;
+        // Конструктор по умолчанию
+        public HotelManagmentSysWindow(int userId)
         {
             InitializeComponent();
+            _currentUserId = userId;
 
             GuestsFrame.Navigate(new GuestsPage());
             BookingsFrame.Navigate(new BookingPage());
             PhonesFrame.Navigate(new RoomPage());
         }
-
+        
+       
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -42,13 +38,20 @@ namespace Belikov_IA
             Admin.Show();
             this.Hide();
         }
-        private void toCleaningManage_click(object sender, RoutedEventArgs e) { 
-        
-            CleaningSheduleWindow Cleaning = new CleaningSheduleWindow();
-            Cleaning.Owner = this;  
-            Cleaning.Show(); 
+        private void toCleaningManage_click(object sender, RoutedEventArgs e)
+        {
+            // Получаем данные текущего пользователя из БД
+
+
+
+            // Передаем ID и роль "менеджер" (даже если в БД указано иначе)
+            CleaningSheduleWindow cleaning = new CleaningSheduleWindow(_currentUserId, "менеджер");
+            cleaning.Owner = this;
+            cleaning.Show();
             this.Hide();
-        
         }
+                    
+                  
+        
     }
 }

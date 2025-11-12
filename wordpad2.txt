@@ -474,3 +474,101 @@
     </Grid>
 
 </Window>
+
+
+12.11.2025 кнопки для клининга:
+  // ОБРАБОТЧИКИ КНОПОК
+
+  //private void BtnAdd_Click(object sender, RoutedEventArgs e)
+  //{
+  //    if (!_isManagerOrAdmin)
+  //    {
+  //        MessageBox.Show("Недостаточно прав для добавления записей!", "Ошибка прав");
+  //        return;
+  //    }
+
+  //    try
+  //    {
+  //        using (var db = new Model1Entities())
+  //        {
+  //            var newCleaning = new Cleaning_Rooms
+  //            {
+  //                cleaningTime = DateTime.Now,
+  //                cleaningStatus = "Не выполнено",
+  //                employee_id = null
+  //            };
+
+  //            db.Cleaning_Rooms.Add(newCleaning);
+  //            db.SaveChanges();
+
+  //            MessageBox.Show("Новая запись уборки добавлена!", "Успех");
+  //            LoadCleaningData();
+  //        }
+  //    }
+  //    catch (Exception ex)
+  //    {
+  //        MessageBox.Show($"Ошибка при добавлении: {ex.Message}", "Ошибка");
+  //    }
+  //}
+
+  //private void BtnSave_Click(object sender, RoutedEventArgs e)
+  //{
+  //    if (!_isManagerOrAdmin)
+  //    {
+  //        MessageBox.Show("Недостаточно прав для сохранения изменений!", "Ошибка прав");
+  //        return;
+  //    }
+
+  //    try
+  //    {
+  //        using (var db = new Model1Entities())
+  //        {
+  //            var updatedCleanings = Cleaning.ItemsSource as List<CleaningDisplay>;
+
+  //            if (updatedCleanings != null)
+  //            {
+  //                foreach (var displayCleaning in updatedCleanings)
+  //                {
+  //                    var dbCleaning = db.Cleaning_Rooms.FirstOrDefault(c => c.employee_id == displayCleaning.cleaning_id);
+
+  //                    if (dbCleaning != null)
+  //                    {
+  //                        // Обновляем только три разрешенных поля
+  //                        dbCleaning.cleaningTime = displayCleaning.cleaningdate;
+  //                        dbCleaning.room_id = displayCleaning.room_id;
+  //                        dbCleaning.cleaningStatus = displayCleaning.status ? "InProcess" : "Complete";
+  //                    }
+  //                }
+
+  //                db.SaveChanges();
+  //                MessageBox.Show("Изменения успешно сохранены!", "Успех");
+  //            }
+  //        }
+  //    }
+  //    catch (Exception ex)
+  //    {
+  //        MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка");
+  //    }
+  //}
+
+ //// Отключаем кнопки для сотрудника
+ //private void DisableEmployeeButtons()
+ //{
+ //    if (btnAdd != null)
+ //    {
+ //        btnAdd.IsEnabled = false;
+ //        btnAdd.Content = "ДОБАВИТЬ (нет прав)";
+ //    }
+
+ //    if (btnSave != null)
+ //    {
+ //        btnSave.IsEnabled = false;
+ //        btnSave.Content = "СОХРАНИТЬ (нет прав)";
+ //    }
+
+ //    if (btnChangeStatus != null)
+ //    {
+ //        btnChangeStatus.IsEnabled = false;
+ //        btnChangeStatus.Content = "ИЗМЕНИТЬ СТАТУС (нет прав)";
+ //    }
+ //}

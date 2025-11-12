@@ -8,19 +8,47 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Комната">
 
+    <Page.Resources>
+        <!-- Стили как в Admin -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#1A1A2E"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#E94560"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#2A2A2A"/>
+            <Setter Property="AlternatingRowBackground" Value="#333333"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#E94560"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+    </Page.Resources>
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="440"/>
         </Grid.RowDefinitions>
-        <DataGrid Name="RoomsDataGrid" AutoGenerateColumns="False" Background="Gray" SelectionChanged="RoomsDataGrid_SelectionChanged" Margin="0,0,0,10">
+        <DataGrid Name="RoomsDataGrid" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="1" 
+                  Margin="0,0,0,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Этаж" Binding="{Binding floor}" Width="100" />
                 <DataGridTextColumn Header="Номер" Binding="{Binding room}" Width="150"/>
                 <DataGridTextColumn Header="Категория номера" Binding="{Binding room_category}" Width="200"/>
-                <DataGridTextColumn Header="Цена за ночь" Binding="{Binding night_price}" Width="200"/>
+
                 <DataGridTextColumn Header="Статус номера" Binding="{Binding room_status}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+
     </Grid>
 </Page>

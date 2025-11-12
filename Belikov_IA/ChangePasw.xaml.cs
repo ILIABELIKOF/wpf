@@ -7,7 +7,7 @@ namespace Belikov_IA
     public partial class ChangePasw : Window
     {
         private readonly int _userId;
-        private string currentUsername; // текущий пользователь
+       
         private string currentPassword; // текущий пароль
         
 
@@ -110,7 +110,7 @@ namespace Belikov_IA
                         
 
                         // Логирование успешного изменения
-                        MessageBox.Show($"Пароль для пользователя {currentUsername} был автоматически обновлен");
+                        MessageBox.Show($"Пароль для пользователя  был автоматически обновлен");
                     
 
 

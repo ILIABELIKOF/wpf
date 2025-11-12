@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Belikov_IA"
         mc:Ignorable="d"
-    Title="Авторизация" Height="480" Width="800" SizeToContent="WidthAndHeight">
+    Title="Авторизация" Height="580" Width="900" >
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0C0C17" Offset="0"/>
@@ -69,7 +69,7 @@
     <Grid>
 
 
-        <Border Margin="100,0,100,0" Padding="30" VerticalAlignment="Center" Height="359">
+        <Border Margin="0,0,10,0" Padding="30" VerticalAlignment="Center" Height="464">
             <StackPanel>
                 <TextBlock Text="Авторизация "  FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"
                       Foreground="#FF4444" FontWeight="Black" FontFamily="Impact"/>
@@ -85,20 +85,14 @@
                         <Button x:Name="LoginButton" Content="ВОЙТИ" Height="35" Click="LoginButton_Click"
                            FontSize="14" IsDefault="True"/>
 
-                        <!-- Новая кнопка для управляющего -->
-                        <Button x:Name="ManagerLoginButton" Content="ВОЙТИ КАК МЕНЕДЖЕР" 
-                            Height="18" Click="ManagerLoginButton_Click"
-                            FontSize="12" Margin="0,10,0,0"
-                            Background="#533483"
-                            BorderBrush="#E94560" Width="142"
-                                />
+
 
                     </StackPanel>
                 </Border>
             </StackPanel>
         </Border>
 
-        
+
     </Grid>
 
 

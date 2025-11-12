@@ -13,6 +13,9 @@ namespace Belikov_IA
         public MainWindow()
         {
             InitializeComponent();
+
+            
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
        
         
@@ -80,12 +83,23 @@ namespace Belikov_IA
                             Admin Admin = new Admin();
                             Admin.Show();
                         }
-                        else
+                        else if (user.role == "сотрудник")
                         {
-                            MessageBox.Show("Пока ничего нету для пользователей и сотрудников ", "Скоро будет информация о бронировании!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            // Передаем ID и роль "менеджер" (даже если в БД указано иначе)
+                            CleaningSheduleWindow cleaning = new CleaningSheduleWindow(user.id, "сотрудник");
+                            cleaning.Owner = this;
+                            cleaning.Show();
+                            
+                        }
+                        else if (user.role == "менеджер") {
+
+                            HotelManagmentSysWindow Manager = new HotelManagmentSysWindow(user.id);
+                            Manager.Owner = this;
+                            Manager.Show();
+                            
 
                         }
-                        this.Close();
+                        
                     }
                 }
                 else
@@ -115,16 +129,6 @@ namespace Belikov_IA
             
          }
 
-
-        //Кнопка ДЛЯ КРУТОГО
-        private void ManagerLoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Открываем окно входа для управляющего
-            ManagerLoginPage managerLoginWindow = new ManagerLoginPage();
-            managerLoginWindow.Owner = this;
-            managerLoginWindow.ShowDialog();
-            this.Close();
-        }
 
 
     }

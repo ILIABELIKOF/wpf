@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Belikov_IA"
         mc:Ignorable="d"
-        Title="График Уборки" Height="450" Width="800">
+        Title="График Уборки" Height="490" Width="800">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#1A1A2E" Offset="0"/>
@@ -55,7 +55,7 @@
                     <Setter Property="Background" Value="#3A3A4E"/>
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#E94560"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="White"/>
                 </Trigger>
             </Style.Triggers>
@@ -69,7 +69,7 @@
                         <GradientStop Color="#CC0000" Offset="1"/>
                     </LinearGradientBrush>
                 </Setter.Value>
-                
+
             </Setter>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#660000"/>
@@ -82,11 +82,17 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="20,20,20,54">
+    <Grid Margin="20,20,10,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="493*"/>
+            <ColumnDefinition Width="264*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="43"/>
+            <RowDefinition Height="Auto" MinHeight="8"/>
         </Grid.RowDefinitions>
 
         <!-- Заголовок в стиле проекта -->
@@ -94,49 +100,58 @@
                    Grid.Row="0"
                    FontSize="18"
                    FontWeight="Black"
-                   HorizontalAlignment="Center"
-                   Margin="0,10,0,10"
-                   Foreground="#CC0000" 
+                   HorizontalAlignment="Left"
+                   Margin="235,10,0,10"
+                   Foreground="#E94560" 
                    Background="#1A1A2E"
-                   FontFamily="Impact" Width="228"/>
+                   FontFamily="Impact" Width="228" Grid.Column="1"/>
 
         <!-- DataGrid с оформлением -->
-        <DataGrid x:Name="Users"
+        <DataGrid x:Name="Cleaning"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
-                  Margin="10"
+                  Margin="10,41,10,32"
                   SelectionMode="Single"
-                  Grid.Row="1"
                   VerticalContentAlignment="Center"
-                  HorizontalContentAlignment="Center">
+                  HorizontalContentAlignment="Center" Grid.ColumnSpan="3"
+                  SelectionChanged="Cleaning_SelectionChanged" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата уборки" 
-                                   Binding="{Binding cleaningdate}" 
+                <DataGridTextColumn Header="Дата и Время уборки" 
+                                   Binding="{Binding cleaningdate, StringFormat=dd.MM.yyyy HH:mm}" 
                                    Width="*"
-                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
-                <DataGridTextColumn Header="Номер комнаты" 
-                                   Binding="{Binding number}" 
+                                   IsReadOnly="False"/>
+                <DataGridTextColumn Header="id комнаты" 
+                                   Binding="{Binding room_id}" 
                                    Width="*"
-                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
-                <DataGridTextColumn Header="Статус" 
-                                   Binding="{Binding status}" 
+                                   IsReadOnly="False"/>
+                <DataGridComboBoxColumn Header="Статус" 
+                                   SelectedValueBinding="{Binding status}"
                                    Width="*"
-                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
-                <DataGridTextColumn Header="Действия" 
-                                   Binding="{Binding actions}" 
-                                   Width="*"
-                                   ElementStyle="{StaticResource {x:Type TextBlock}}"/>
+                                   IsReadOnly="False">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.StatusOptions}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Информационная панель -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <TextBlock Text="Всего записей: " Foreground="White" FontFamily="Consolas"/>
-            <TextBlock x:Name="RecordsCount" Text="0" Foreground="#E94560" FontFamily="Consolas" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="275,335,0,35" Width="106" Grid.Column="1" Grid.RowSpan="2">
+            <TextBlock Text="Всего записей: " Foreground="White" FontFamily="Consolas" Height="24"/>
+            <TextBlock x:Name="RecordsCount" Text="0" Foreground="#E94560" FontFamily="Consolas" FontWeight="Bold" Height="21" Width="24"/>
         </StackPanel>
-        <StackPanel Margin="652,40,-10,-46" Grid.Row="2">
-            <Button x:Name="btnCancel" Content="ВЫХОД" Width="91" Click="BtnCancel_Click1" Height="31"/>
+
+
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,1,0,2" Width="598" Grid.ColumnSpan="3">
+            <Button x:Name="btnAdd" Content="ДОБАВИТЬ" Width="120" Click="BtnAdd_Click"/>
+            <Button x:Name="btnDelete" Content="УДАЛИТЬ" Width="120" Click="BtnDelete_Click" Margin="10,0,0,0"/>
+            <Button x:Name="btnSaveAll" Content="СОХРАНИТЬ ВСЁ" Width="120" Click="BtnSaveAll_Click" Margin="10,0,0,0"/>
+            <Button x:Name="btnCancel" Content="ВЫХОД" Width="91" Click="BtnCancel_Click1" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,0 +1,105 @@
+﻿<Window x:Class="Belikov_IA.AddCleaningRecord"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Belikov_IA"
+        mc:Ignorable="d"
+        Title="AddCleaningRecord" Height="450" Width="800">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1A1A2E" Offset="0"/>
+            <GradientStop Color="#533483" Offset="0.5"/>
+            <GradientStop Color="#E94560" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#E94560"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Margin" Value="0,5,0,10"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#E94560"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Margin" Value="0,5,0,10"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#E94560" Offset="0"/>
+                        <GradientStop Color="#CC0000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#660000"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="ДОБАВЛЕНИЕ ЗАПИСИ УБОРКИ"
+                   Grid.Row="0"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   Foreground="#E94560"/>
+
+        <!-- Дата и время -->
+        <TextBlock Text="Дата и время уборки:" Grid.Row="1"/>
+        <DatePicker x:Name="dpCleaningDate" Grid.Row="1" Margin="0,25,0,0" Height="25"
+                   Background="#2A2A2A" Foreground="#E94560" BorderBrush="#E94560"/>
+
+        <!-- ID комнаты -->
+        <TextBlock Text="ID комнаты:" Grid.Row="2"/>
+        <TextBox x:Name="txtRoomId" Grid.Row="2" Margin="0,25,0,0"/>
+
+        <!-- Статус -->
+        <TextBlock Text="Статус:" Grid.Row="3"/>
+        <ComboBox x:Name="cmbStatus" Grid.Row="3" Margin="0,25,0,0">
+            <ComboBoxItem Content="InProcess" IsSelected="True"/>
+            <ComboBoxItem Content="Complete"/>
+        </ComboBox>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="ДОБАВИТЬ" Click="BtnAdd_Click" IsDefault="True"/>
+            <Button Content="ОТМЕНА" Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

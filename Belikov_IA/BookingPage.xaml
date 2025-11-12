@@ -6,38 +6,70 @@
       xmlns:local="clr-namespace:Belikov_IA"
       mc:Ignorable="d"
       Title="Бронирования" Height="410" Width="803">
-    <Page.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0C0C17" Offset="0"/>
-            <GradientStop Color="#1A1A2E" Offset="0.5"/>
-            <GradientStop Color="#16213E" Offset="1"/>
-            <!-- Blue Violet -->
-        </LinearGradientBrush>
-    </Page.Background>
-    <Grid Height="410" VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+
+    <Page.Resources>
+        <!-- Стили как в других окнах -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#1A1A2E"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#E94560"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#2A2A2A"/>
+            <Setter Property="AlternatingRowBackground" Value="#333333"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#E94560"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Name="GuestsDataGrid" AutoGenerateColumns="False" Background="Transparent" Height="420" VerticalAlignment="Top" Grid.Row="1">
+
+        <!-- Заголовок -->
+        <TextBlock Text="ИНФОРМАЦИЯ О БРОНИРОВАНИЯХ"
+                   Grid.Row="0"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,10"
+                   Foreground="#E94560"/>
+
+        <!-- DataGrid -->
+        <DataGrid Name="BookingDataGrid" 
+                  AutoGenerateColumns="False" 
+                  Grid.Row="1"
+                  IsReadOnly="True"
+                  Margin="0,0,0,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="100" />
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding last_name}" Width="100"/>
-                <DataGridTextColumn Header="Номер проживания" Binding="{Binding room_number}" Width="120"/>
-                <DataGridTextColumn Header="Дата въезда" Binding="{Binding enter_date}" Width="90"/>
-                <DataGridTextColumn Header="Дата выезда" Binding="{Binding leave_date}" Width="90"/>
-                <DataGridTextColumn Header="Стоимость проживания" Binding="{Binding price}" Width="150"/>
-                <DataGridTextColumn Header="Статус проживания" Binding="{Binding status}" Width="150"/>
+                <DataGridTextColumn Header="ID комнаты" Binding="{Binding room_id}" Width="80"/>
+                <DataGridTextColumn Header="Имя гостя" Binding="{Binding guest_first_name}" Width="120"/>
+                <DataGridTextColumn Header="Фамилия гостя" Binding="{Binding guest_last_name}" Width="120"/>
+                <DataGridTextColumn Header="Дата заезда" Binding="{Binding check_in_date, StringFormat=dd.MM.yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Дата выезда" Binding="{Binding check_out_date, StringFormat=dd.MM.yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Цена проживания" Binding="{Binding stay_price}" Width="120"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding status}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Background="Gray" Width="780">
-            <Button  Content="Добавить бронирование" Height="50" Width="150" Cursor="Hand" Click="addReserveClicked" Background="LightGray"/>
-            <Button  Content="Удалить бронирование" Height="50" Width="150" Cursor="Hand" Click="deleteReserveClicked" Margin="10, 0, 10, 0" Background="LightGray"/>
-        </StackPanel>-->
+
+        <!-- Информационная панель -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="Всего бронирований: " Foreground="White" FontFamily="Consolas"/>
+            <TextBlock x:Name="BookingCount" Text="0" Foreground="#E94560" FontFamily="Consolas" FontWeight="Bold"/>
+        </StackPanel>
     </Grid>
 </Page>

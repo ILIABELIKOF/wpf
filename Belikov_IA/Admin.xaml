@@ -15,6 +15,26 @@
     </Window.Background>
 
     <Window.Resources>
+        <!-- Стиль для строк DataGrid -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E94560"/>
+
+            <Style.Triggers>
+                <!-- СНАЧАЛА ВЫДЕЛЕНИЕ (самый высокий приоритет) -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+
+
+                <!-- НАВЕДЕНИЕ (самый низкий приоритет) -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3A3A4E"/>
+                    <Setter Property="Foreground" Value="#E94560"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#E94560"/>
             <Setter Property="FontFamily" Value="Consolas"/>
@@ -39,7 +59,7 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
-
+        
         <Style TargetType="DataGrid">
             <Setter Property="Background" Value="#1A1A2E"/>
             <Setter Property="Foreground" Value="#E94560"/>
@@ -61,13 +81,15 @@
             <Setter Property="Foreground" Value="#E94560"/>
             <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="FontFamily" Value="Consolas"/>
-            <Style.Triggers>
+            <!--<Style.Triggers>
                 <DataTrigger Binding="{Binding Role}" Value="администратор">
                     <Setter Property="Background" Value="#8B0000"/>
-                    <!-- Темно-бардовый -->
+                   
                     <Setter Property="Foreground" Value="White"/>
                 </DataTrigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
+            
+            
         </Style>
        
 
